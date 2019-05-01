@@ -6,6 +6,15 @@
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.listEnvVars("my-project")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
+
 ```json 
 [{"name":"foo","value":"xxxx1234"}]
 ```
@@ -16,6 +25,14 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar?c
 
 ```sh 
 curl -X POST --header "Content-Type: application/json" -d '{"name":"foo", "value":"bar"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.createEnvVar("my-project", "VAR_NAME", "VAR_VALUE")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json
@@ -30,6 +47,14 @@ curl -X POST --header "Content-Type: application/json" -d '{"name":"foo", "value
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.getEnvVar("my-project", "VAR_NAME")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 {"name":"foo","value":"xxxx"}
 ```
@@ -40,6 +65,15 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:
 
 ```sh
 curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name?circle-token=:token
+```
+
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.deleteEnvVar("my-project", "VAR_NAME")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json

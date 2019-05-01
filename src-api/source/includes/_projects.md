@@ -10,6 +10,14 @@ The sections below describe the endpoints you may call to return Project informa
 curl https://circleci.com/api/v1.1/projects?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.listProjects()
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 [ {
   "vcs_url": "https://github.com/circleci/mongofinil",
@@ -57,6 +65,14 @@ Returns an array of all projects you are currently following on CircleCI, with b
 
 ```sh
 curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/follow?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.followProject("project-name-to-follow")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json
@@ -133,6 +149,15 @@ Follows a new project. CircleCI will then monitor the project for automatic buil
 curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+// Build summary for 10 most recent builds (offset by 1)
+CCI.listRecentBuilds(10, 1)
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 [ {
   "vcs_url" : "https://github.com/circleci/mongofinil",
@@ -187,6 +212,15 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-t
 ```sh
 curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
 ```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.getProject("My Project")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 
 ```json
 [ {
@@ -296,6 +330,15 @@ The example to the right shows a user request for recent build information. Noti
 ```sh
 curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build-cache?circle-token=:token
 ```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.clearBuildCache("project_name")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 
 ```json
 {

@@ -6,6 +6,14 @@
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.listCheckoutKeys("my-project")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 [{"public_key": "ssh-rsa...",
   "type": "deploy-key", // can be "deploy-key" or "github-user-key"
@@ -21,6 +29,14 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout
 
 ```sh
 curl -X POST --header "Content-Type: application/json" -d '{"type":"github-user-key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.createCheckoutKey("my-project", "github-user-key")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json
@@ -45,6 +61,14 @@ type | The type of key to create. Can be 'deploy-key' or 'github-user-key'.
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.getCheckoutKey("my-project", "c9:0b:1c:4f:d5:6...")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 {"public_key": "ssh-rsa...",
   "type": "deploy-key", // can be "deploy-key" or "user-key"
@@ -64,6 +88,14 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout
 curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.deleteCheckoutKey("my-project", "c9:0b:1c:4f:d5:6...")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 {"message":"ok"}
 ```
@@ -76,6 +108,14 @@ curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:projec
 curl -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname","private_key":"RSA private key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.createSshKey("my-project", "yout_hostname", "Your_rsa_private_key")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```
 # no response expected
 ```
@@ -84,6 +124,14 @@ curl -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname
 
 ```sh
 curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fingerprint", "hostname":"Hostname"} https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.createSshKey("my-project", "yout_hostname", "Your_rsa_private_key")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```
@@ -99,6 +147,14 @@ curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fing
 
 ```sh
 curl -X POST --header "Content-Type: application/json" -d '{"apikey":"Heroku key"}' https://circleci.com/user/heroku-key?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.createHerokuKey("heroku_key")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```

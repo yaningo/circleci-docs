@@ -6,6 +6,14 @@
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.listBuildArtifacts("my-project", 1)
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 [ {
   "path" : "raw-test-output/go-test-report.xml",
@@ -43,6 +51,15 @@ You can download an individual artifact file via the API by appending a query st
 
 ```sh
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:token&branch=:branch&filter=:filter
+```
+
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.listRecentArtifacts("circleci-docs")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json

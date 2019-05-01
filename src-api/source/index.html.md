@@ -3,6 +3,7 @@ title: CircleCI API Reference
 
 language_tabs:
   - shell
+  - javascript
   
 includes:
   - overview

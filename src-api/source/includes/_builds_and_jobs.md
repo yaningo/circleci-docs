@@ -6,6 +6,14 @@
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.getBuild("my-project", 1)
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 {
   "vcs_url" : "https://github.com/circleci/mongofinil",
@@ -95,7 +103,14 @@ This is also the payload for the notification webhooks, in which case this objec
 
 ```sh
 curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry?circle-token=:token
+```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.retryBuild("my-project", 1)
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 > You can retry a build with ssh by swapping “retry” with “ssh”.
@@ -139,9 +154,17 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh-users?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.enableBuildSSH("my-project", 1)
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
+
 ```text
 # ...Build Data
-
 ```
 
 **`POST` Request:** This API call is only available when using a user API token. If the current user has permission to build the project, this API adds the current user's SSH public key to the authorized keys on each container running a build. This allows them to SSH to the build containers.
@@ -150,6 +173,14 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 
 ```sh
 curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/cancel?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.cancelBuild("my-project", 1)
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json
@@ -197,6 +228,14 @@ curl -X POST --header "Content-Type: application/json" -d '{
 }
 
 https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.triggerBuild("my-project")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json
@@ -296,6 +335,14 @@ curl -X POST --header "Content-Type: application/json" -d '{
 https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.triggerBuildByBranch("my-project")
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 {
   "author_name": "Allen Rohner",
@@ -388,6 +435,14 @@ build_parameters | Additional environment variables to inject into the build env
 curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build?circle-token=:token
 ```
 
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.triggerBuild("my-project", {parallel: 4})
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+```
+
 ```json
 {
   "status": 200,
@@ -415,6 +470,14 @@ tag | The git tag to build. Cannot be used with branch and revision parameters.
 
 ```sh
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/tests?circle-token=:token
+```
+
+```javascript
+const CCI = new CircleCI({token: "A2i9dklaja...", vcsType: "github", username: "circleUser123"})
+
+CCI.listBuildTestData("my-project", 1)
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
 ```
 
 ```json
