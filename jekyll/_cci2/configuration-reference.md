@@ -52,7 +52,7 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
+In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. Refer to the [Orbs Registry listing](https://circleci.com/orbs/registry/orb/circleci/hello-build) for the `hello-build` source config.
 
 ## **`commands`** (requires version: 2.1)
 
@@ -81,7 +81,7 @@ commands:
 
 ## **`executors`** (requires version: 2.1)
 
-Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+[Executors]({{ site.baseurl }}/2.0/glossary/executors/) define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -91,7 +91,7 @@ machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 working_directory | N | String | In which directory to run the steps.
-environment | N | Map | A map of environment variable names and values.
+environment | N | Map | A map of [environment variable]({{ site.baseurl }}/2.0/env-vars/) names and values.
 {: class="table table-striped"}
 
 Example:
@@ -114,11 +114,11 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 
 ## **`jobs`**
 
-A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
+A run is comprised of one or more named jobs. [Jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview/) are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have a name that is unique within the `.circleci/config.yml` file.
 
-If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
+If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional [jobs]({{ site.baseurl }}(/2.0/concepts/#jobs) and run them using the [CircleCI API]({{ site.baseurl }}/api/).
 
 **Note:**
 Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them in parallel.
@@ -136,15 +136,15 @@ shell | N | String | Shell to use for execution command in all steps. Can be ove
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
-environment | N | Map | A map of environment variable names and values.
+environment | N | Map | A map of [environment variable]({{ site.baseurl }}/2.0/env-vars/) names and values.
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 {: class="table table-striped"}
 
-<sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
+<sup>(1)</sup> Exactly one of them should be specified. It is an error to set more than one.
 
 #### `environment`
-A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
+A map of environment variable names and values. These will override any [environment variables]({{ site.baseurl }}/2.0/env-vars/) you set in the CircleCI application.
 
 #### `parallelism`
 
@@ -184,17 +184,17 @@ Configured by `docker` key which takes a list of maps:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The name of a custom docker image to use
+image | Y | String | The name of a docker image to use, see [Pre-built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/#section=configuration).
 name | N | String | The name the container is reachable by.  By default, container services are accessible through `localhost`
 entrypoint | N | String or List | The command used as executable when launching the container
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
 user | N | String | Which user to run commands as within the Docker container
 environment | N | Map | A map of environment variable names and values
 auth | N | Map | Authentication for registries using standard `docker login` credentials
-aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
+aws_auth | N | Map | Authentication for [AWS EC2 Container Registry (ECR)]({{ site.baseurl }}/2.0/ecs-ecr/#section=deployment)
 {: class="table table-striped"}
 
-The first `image` listed in the file defines the primary container image where all steps will run.
+The first `image` listed in the file defines the [primary container]({{ site.baseurl }}/2.0/glossary/#primary_container/) image where all steps will run.
 
 `entrypoint` overrides default entrypoint from Dockerfile.
 
@@ -333,18 +333,18 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version `9.0`:
+**Example:** Use a macOS virtual machine with Xcode version `10.1.0`:
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "9.0"
+      xcode: "10.1.0"
 ```
 
 #### **`branches`**
 
-Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Defines rules for execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -382,7 +382,7 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-**Note:** The `resource_class` feature is automatically enabled on Performance Plans. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
+**Note:** The resource class feature is automatically enabled on Performance Plans. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
 
 It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
 
@@ -471,7 +471,7 @@ Key | Required | Type | Description
 command | Y | String | Command to run via the shell
 name | N | String | Title of the step to be shown in the CircleCI UI (default: full `command`)
 shell | N | String | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))
-environment | N | Map | Additional environmental variables, locally scoped to command
+environment | N | Map | Additional [environmental variables]({{ site.baseurl }}/2.0/env-vars/), locally scoped to command
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | In which directory to run this step (default:  [`working_directory`](#jobs) of the job)
 no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
