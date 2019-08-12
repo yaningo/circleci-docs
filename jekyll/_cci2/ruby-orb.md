@@ -67,7 +67,7 @@ A [job][doc-job] is a collection of steps that run sequentially in the same exec
 ```
 
 This line is the first time we get to use the Ruby orb.
-Instead of manually specifying an [executor][doc-executor] and image to use, the Ruby orb provides a "default" executor for us to us.
+Instead of manually specifying an [executor][doc-executor] and image to use, the Ruby orb provides a "default" executor for us to use.
 This default executor is the CircleCI [Ruby Docker image][ruby-img].
 
 ```yaml

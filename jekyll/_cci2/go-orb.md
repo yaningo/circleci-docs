@@ -67,7 +67,7 @@ A [job][doc-job] is a collection of steps that run sequentially in the same exec
 ```
 
 This line is the first time we get to use the Go orb.
-Instead of manually specifying an [executor][doc-executor] and image to use, the Go orb provides a "default" executor for us to us.
+Instead of manually specifying an [executor][doc-executor] and image to use, the Go orb provides a "default" executor for us to use.
 This default executor is the CircleCI [Go Docker image][go-img].
 
 ```yaml
@@ -107,7 +107,7 @@ Otherwise it won't do anything and simply proceed to the next step.
 
 Runs `go test` for you.
 
-This completes the walk-through of the GO example config with the Go orb.
+This completes the walk-through of the Go example config with the Go orb.
 This should be a good starting point for your Go app.
 
 
