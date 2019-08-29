@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Internet.
 
 url: "http://localhost:4040" # the base hostname & protocol for your site
-baseurl: "/docs" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 
 plugins:
@@ -49,7 +49,7 @@ asciidoctor:
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
-    outfilesuffix: /index.html 
+    outfilesuffix: /index.html
 
 collections:
   # this is named with an underscore because it needs to be processed
@@ -81,8 +81,8 @@ collections:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /2.0/:path/
-    prefix: "/2.0"
+    permalink: /docs/2.0/:path/
+    prefix: "/docs/2.0"
     selectorName: "2.0"
   api:
     name: "API Docs"
@@ -95,8 +95,8 @@ collections:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /ja/2.0/:path/
-    prefix: "/ja/2.0"
+    permalink: /ja/docs/2.0/:path/
+    prefix: "/ja//docs/2.0"
     selectorName: "2.0"
 
 twitter_username: circleci
