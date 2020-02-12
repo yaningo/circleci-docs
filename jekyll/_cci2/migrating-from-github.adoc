@@ -29,7 +29,7 @@ CircleCI differs primarily in configuration syntax, setting up workflow and job 
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
-[cols="50%,50%"]
+[cols="50,50"]
 |===
 | Github | CircleCI
 
@@ -91,11 +91,22 @@ For each of the https://circleci.com/docs/2.0/executor-types/[executor types], y
 
 See the table in the next section to compare configuration.
 
+[source, yaml]
+----
+# Choosing an Operating System
+runs-on: uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuubuntu-latest # or windows, etc.
+
+# If running steps on a container
+container:
+  image: openjdk:11.0-jdk
+----
+
+
 == Configuration Comparison
 
 [.table.table-striped]
-[cols=2*, options="header,unbreakable,autowidth", stripes=even]
-[cols="5,5"]
+[cols=2*, options="header,unbreakable", stripes=even]
+[cols="50,50"]
 |===
 | Github Config | CircleCI Config
 
