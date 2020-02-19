@@ -3,6 +3,7 @@
 Server documentation is written in ASCIIDOC and built for the web and PDF using ASCIIDOCTOR + Jekyll and PDF plugins.
 
 ## Document Structure
+
 Server documentation is provided in two formats - html on the main CircleCI docs site generated with Jekyll, showing the current docs, and also PDFs of our Operations and Installation guides are provided for each feature release.
 
 Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for the ops guide (`_ops-guide.adoc`) and the installation guide (`_aws-install.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]` etc.

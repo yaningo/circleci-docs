@@ -2,12 +2,12 @@
 
 The documentation for our  API is handled in two possible places currently:
 
-- [API v1](https://circleci.com/docs/api/v1-reference/) 
+**[API v1](https://circleci.com/docs/api/v1-reference/)**
 
 The original docs are currently accessible via the CircleCI landing page > Developers Dropdown > "Api"
 These docs were built by hand; written in markdown, and processed by Slate.
 
-- [API v2](https://circleci.com/docs/api/v2) -
+**[API v2](https://circleci.com/docs/api/v2)**
 
   A newer API guide, built with [Slate](https://github.com/lord/slate) and
   openAPI spec. These documents are **automatically build** as part of our CI
