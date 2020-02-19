@@ -1,55 +1,68 @@
 # Local Development Instructions
 
-
+This document covers how to locally develop our Jekyll-based docs as well as the Slate API documentation.
 There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](http://bundler.io/).
 
 ## 1. Local Development with Docker (recommended)
 
-1. Install Docker for your platform: <https://docs.docker.com/engine/installation/>
-2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
-3. Download this file: https://circleci.com/docs/assets/app.bundle-576b5ac91166f5b87d5f6254b647c9182e3468eeea4717c8cdc7ff7304cac0c9.js
-4. Rename the file from Step 3 to `app.bundle.js` and save it in the `jekyll/assets/js` directory.
-3. `cd` into the directory where you cloned the docs
-4. Run `docker-compose up`
-5. The docs site will now be running on <http://localhost:4000/docs/>
+**Prerequisites:**
 
-**Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone your version in step 2 above. Then when you push your changes to your fork you can submit a pull request to us.
+- [Install Docker](https://docs.docker.com/engine/installation/) for your platform.
+- [Install node/npm](https://nodejs.org/en/) for your platform
+
+Run the following commands:
+
+```sh
+git clone https://github.com/circleci/circleci-docs.git # clone the repo
+cd circleci-docs # change directory into the repo
+
+# This generates a bundle file to get compiled into jekyll.
+# this currently isn't ideal, but works
+# TODO - this should get handled by docker-compose.
+npm install
+npm run webpack-watch
+docker-compose up # boot up docker
+
+# docs are now running at `http://localhost:4000/docs`
+```
+
+
+**Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone _your version_ instead of the original repo as listed above. Then, when you push your changes to your fork you can submit a pull request to us.
 
 
 ## 2. Local Development with Ruby and Bundler (alternative to Docker)
 
-If you already have a stable Ruby environment (currently Ruby 2.3.3) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
+**Prerequisites:**
 
-Check out the [Gemfile](Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
+- Ruby (currently ruby '2.5.1') - consider using [rvm](https://github.com/rvm/rvm) or [rbenv](https://github.com/rbenv/rbenv) to manage ruby versions.
+- An installation of Node
+- An installation of [Jekyll](https://jekyllrb.com/docs/installation/)
 
-We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofer) to test links, images, and HTML. The docs site will need a passing build to be deployed, so use HTMLProofer to test everything before you push changes to GitHub.
+First, install js dependencies and create the app.bundle.js file jekyll requires.
 
-You're welcome to use [Bundler](http://bundler.io/) to install these gems.
+```sh
+git clone https://github.com/circleci/circleci-docs.git
+cd circleci-docs
+npm install
+npm run webpack-prod
 
-## Building js assets
-
-Our js assets are compiled by webpack and put into a place where the jekyll build can find them.
-
-Anytime you are working on js be sure to run:
-
-```bash
-$ npm install
-$ npm run webpack-watch
+# if you are developing JavaScript for the docs sight, run the following instead:
+# npm run webpack-watch
 ```
 
-## First Run
+In another terminal, run the jekyll server:
 
-To get a local copy of our docs, run the following commands:
-
-```bash
-git clone https://github.com/circleci/circleci-docs.git
-cd circleci-docs/jekyll
+```sh
+# in circleci-docs/jekyll
 jekyll serve -Iw
 ```
 
+
 Jekyll will build the site and start a web server, which can be viewed in your browser at <http://localhost:4000/docs/>. `-w` tells Jekyll to watch for changes and rebuild, while `-I` enables an incremental rebuild to keep things efficient.
 
-For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
+## Additional Notes
+
+- We use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofer) to test links, images, and HTML. The docs site will need a passing build to be deployed; consider using HTMLProofer locally to test everything before you push changes to GitHub.
 
 ## Editing Docs Locally
 
@@ -60,6 +73,8 @@ All docs live in folders named after the version of CircleCI. The only two you n
 1. Create a branch and switch to it:
 
     `git checkout -b <branch-name>`
+    
+Please consider naming your branch based on the type of work you are doing, or group it under your name, for example `tyler/fix-nav` or `feature/new-footer`
 
 2. Add or modify Markdown files in these directories according to our [style guide](CONTRIBUTING#style-guide).
 
@@ -115,7 +130,7 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 
 ## Submitting Pull Requests
 
-After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
+After you are finished with your changes, please follow our [Contributing Guide](./CONTRIBUTING.md) to submit a pull request.
 
 ## Docker Tag List for CircleCI Convenience Images
 

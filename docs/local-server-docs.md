@@ -64,3 +64,17 @@ In order to make tables display correctly in the web version of Server docs, ass
 Cross references should be made in the form: `<<overview#services-machine,Services Machine>>` where `overview` is the name of the file the destination is in, `services-machine` is the anchor heading, and `Services Machine` is what to display in the prose.
 
 This is a little trickier when cross referencing between the install and ops guides as the xref needs to work for the PDF, across two separate docs, as well as the Jekyll site where you will be dealing with two regular pages as with any xref. In this instance, reference the URL of the Jekyll version, so instead of using the `<<>>` described above, use a normal link `URL[text to display]`.
+
+### Release Checklist
+
+- Make sure the latest version PDFs contain the most up to date content and display the latest patch release number.
+- Set the release version within the PDF build script (`$VERSION`) and also within the Jekyll `_config.yml` under both asciidoc attributes called `serverversion`.
+- Make operational changes required for the release.
+- If anything has changed about the installation or upgrade process, point these out in the relevant docs.
+- If it's a feature release:
+  - Create a new What's New in vx.y.z page.
+  -  follow these steps to create PDFs:
+	- Update the `Version` in `scripts/build_pdfs_local.sh` and check the comment is `FINAL` once all changes are made.
+	- Run `./scripts/build_pdfs_local.sh` to generate the PDFs. 
+	- The PDFs will be located in the `release/tmp` folder - move them to the `jekyll/_cci2` folder.
+	- Add a new PDF section in `jekyll/_data/sidenav.yml`.
