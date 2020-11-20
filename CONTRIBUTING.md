@@ -26,7 +26,7 @@ that conflicts with our values,
 opening a GitHub Issue is a great way
 to give us specific feedback.
 
-To make an issue,
+To make an issue
 refer to the [GitHub Issues Workflow](https://github.com/circleci/circleci-docs/wiki/GitHub-Issues-Workflow) wiki page.
 
 ## Pull Requests
